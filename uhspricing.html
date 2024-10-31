@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cleaning Cost Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .form-container {
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 20px;
+        width: 70%;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .category-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .category-buttons button {
+        background-color: #f1f1f1;
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+        width: 24%;
+    }
+    
+    .category-buttons button.active {
+        background-color: #006400;
+        color: white;
+    }
+    .category-buttons button:hover {
+        background-color: #006400;
+        color: white;
+    }
+    .form-group-inline {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    select, input, textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+    }
+    textarea {
+        resize: vertical;
+    }
+    .button {
+        background-color: #006400;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        transition: background-color 0.3s;
+    }
+    .button:hover {
+        background-color: #004d00;
+    }
+    .summary-container {
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 20px;
+        width: 25%;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .summary-container h2 {
+        font-size: 18px;
+        color: #006400;
+        margin-bottom: 10px;
+    }
+    .summary-container h3 {
+        font-size: 36px;
+        color: #006400;
+        margin: 0;
+        font-weight: bold;
+    }
+</style>
+<script>
+    function calculatePrice() {
+        const residency = document.getElementById("residency-type").value;
+        const frequency = document.getElementById("frequency").value;
+        const packageType = document.getElementById("package").value;
+
+        let price = 0;
+
+        if (residency === "Apartment") {
+            price += 100;
+        } else if (residency === "Villa") {
+            price += 200;
+        }
+
+        if (frequency === "Weekly") {
+            price *= 4;
+        } else if (frequency === "Bi-Weekly") {
+            price *= 2;
+        }
+
+        if (packageType === "Basic") {
+            price += 50;
+        } else if (packageType === "Premium") {
+            price += 100;
+        }
+
+        document.getElementById("final-cost").innerText = price + " QAR";
+    }
+</script>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h1>Cleaning Cost Calculator</h1>
+        <div class="category-buttons">
+            <button class="active">Regular Cleaning</button>
+            <button>Deep Cleaning</button>
+            <button>Specialized Cleaning</button>
+            <button>Car Wash</button>
+        </div>
+        <div class="form-group-inline">
+            <div>
+                <label for="residency-type">Residency Type:</label>
+                <select id="residency-type" onchange="calculatePrice()">
+                    <option value="">Select Residency Type</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Villa">Villa</option>
+                </select>
+            </div>
+            <div>
+                <label for="frequency">Frequency of Service:</label>
+                <select id="frequency" onchange="calculatePrice()">
+                    <option value="">Select Frequency</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Bi-Weekly">Bi-Weekly</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="package">Package Type:</label>
+            <select id="package" onchange="calculatePrice()">
+                <option value="">Select Package</option>
+                <option value="Basic">Basic</option>
+                <option value="Premium">Premium</option>
+            </select>
+        </div>
+        <div class="form-group-inline">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter your Full Name">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="message">Additional Message (Optional):</label>
+            <textarea id="message" rows="4" placeholder="Your message here..."></textarea>
+        </div>
+    </div>
+
+    <div class="summary-container">
+        <h2>FINAL COST</h2>
+        <h3 id="final-cost">0 QAR</h3>
+        <button class="button">Book Now</button>
+    </div>
+</div>
+
+</body>
+</html>
